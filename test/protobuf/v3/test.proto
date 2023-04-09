@@ -1,0 +1,59 @@
+syntax="proto3";
+
+package testV3;
+
+// 定义下面的选项，表示生成service服务类和rpc方法描述，默认不生成
+option cc_generic_services=true;
+
+message LoginRequest
+{
+    string name=1;
+    string pwd=2;
+}
+
+message GetFriendListsRequest
+{
+    uint32 userid=1;
+}
+
+message User
+{
+    string name=1;
+    uint32 age=2;
+    enum Sex
+    {
+        MAN=0;
+        WOMAN=1;
+    }
+    Sex sex=3;
+}
+
+// 因为每种类型的response消息都需要errcode/errmsg
+message ResultCode
+{
+    int32 errcode=1;
+    string errmsg=2;
+}
+
+message LoginResponse
+{
+    ResultCode result=1;
+    bool success=2;
+}
+
+// 返回的好友信息是一个列表，repeated修饰表示多个/列表
+message GetFriendListsResponse
+{
+    ResultCode result=1;
+    repeated User friend_list=2;
+}
+
+// 在protobuf里面定义描述rpc方法的类型 - service
+// 用于序列化rpc方法
+// 约定调用的接口
+service UserServiceRpc
+{
+    rpc Login(LoginRequest) returns(LoginResponse);
+    // rpc GetFriendLists(GetFriendListsRequest) returns(GetFriendListsResponse);
+}
+

@@ -1,0 +1,37 @@
+syntax="proto3";
+
+package example;
+
+option cc_generic_services=true;
+
+message ResultCode{
+    int32 errcoed=1;
+    string errmsg=2;
+}
+
+message LoginRequest{
+    uint32 uid=1;
+    string pwd=2;
+}
+
+message LoginResponse{
+    ResultCode result=1;
+    bool success=2;
+}
+
+
+message RegistRequest{
+    string name=1;
+    string pwd=2;
+}
+
+message RegistResponse{
+    ResultCode result=1;
+    bool success=2;
+    uint32 uid=3;
+}
+
+service UserServiceRpc{
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Regist (RegistRequest) returns (RegistResponse);
+}

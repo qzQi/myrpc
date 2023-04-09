@@ -1,0 +1,49 @@
+syntax="proto3";
+
+package testV2;
+
+message LoginRequest
+{
+    string name=1;
+    string pwd=2;
+}
+
+message GetFriendListsRequest
+{
+    uint32 userid=1;
+}
+
+message User
+{
+    string name=1;
+    uint32 age=2;
+    enum Sex
+    {
+        MAN=0;
+        WOMAN=1;
+    }
+    Sex sex=3;
+}
+
+// 因为每种类型的response消息都需要errcode/errmsg
+message ResultCode
+{
+    int32 errcode=1;
+    string errmsg=2;
+}
+
+message LoginResponse
+{
+    ResultCode result=1;
+    bool success=2;
+}
+
+// 返回的好友信息是一个列表，repeated修饰表示多个/列表
+message GetFriendListsResponse
+{
+    ResultCode result=1;
+    repeated User friend_list=2;
+}
+
+
+

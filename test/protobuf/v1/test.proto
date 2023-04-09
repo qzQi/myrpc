@@ -1,0 +1,19 @@
+syntax="proto3";
+// 声明使用的protobuf版本
+
+package testProto;
+// 类似于cpp的namespace
+
+// 登录请求消息格式
+message LoginRequest
+{
+    string name=1;
+    string pwd=2;
+}
+
+message LoginResponse
+{
+    int32 errcode=1;
+    string errmsg=2;
+    bool success =3;
+}
