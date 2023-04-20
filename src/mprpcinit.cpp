@@ -28,7 +28,7 @@ MpRpcInit::MpRpcInit(){
         std::cout<<"file not open"<<std::endl;
     }
     json js=json::parse(bufStr);
-    cout<<js.dump()<<endl;
+    // cout<<js.dump()<<endl;//使用日志输出。
     zkHost=js["zkHost"].get<string>();
     zkPort=js["zkPort"].get<string>();
 }

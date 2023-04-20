@@ -53,12 +53,14 @@ void RpcProvider::Run() {
     string addr = listenAddr_.toIpPort();
     for (const auto &spEntry : serviceMap) {
         string servicePath = "/" + spEntry.first;
+        // zk的znode不能递归创建，必须先创建上一级，创建的永久性节点
         zkCli.Create(servicePath.c_str(), nullptr, 0, 0);
 
         const auto &methodMap = spEntry.second.methodMap;
         // 获取这个methodMap对应的所有方法
         for (const auto &mpEntry : methodMap) {
             string methodPath=servicePath+"/"+mpEntry.first;
+            // 创建的临时性znode节点
             zkCli.Create(methodPath.c_str(),addr.c_str(),addr.size(),ZOO_EPHEMERAL);
         }
     }
