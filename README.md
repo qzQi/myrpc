@@ -1,3 +1,2 @@
 # MyRpc
-
-基于protobuf与muduo实现的一个同步rpc通信框架。
+一个基于protobuf实现的rpc网络通信框架，网络通信方面采用的muduo网络库。
